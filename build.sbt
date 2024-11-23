@@ -11,7 +11,7 @@ lazy val root = project
 
 		libraryDependencies ++= Seq(
 			"io.javalin" % "javalin" % "6.3.0",
-			"org.slf4j" % "slf4j-simple" % "2.0.16",
+			"ch.qos.logback" % "logback-classic" % "1.5.12",
 			"com.augustnagro" %% "magnum" % "1.3.0",
 			"com.zaxxer" % "HikariCP" % "5.0.1",
 			"mysql" % "mysql-connector-java" % "8.0.33",
