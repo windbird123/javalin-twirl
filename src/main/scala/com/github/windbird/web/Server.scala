@@ -10,7 +10,6 @@ object Server {
 	lazy val logger: Logger = LoggerFactory.getLogger(getClass)
 
 	def home(ctx: Context): Unit = {
-	logger.info("Call HOme")
 		ctx.html(html.index("2024").toString)
 	}
 
