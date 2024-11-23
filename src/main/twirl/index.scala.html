@@ -1,0 +1,28 @@
+@(timestamp: String)
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/webjars/bootstrap/5.3.3/dist/css/bootstrap.min.css">
+    <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
+     <script src="/webjars/alpinejs/3.14.3/dist/cdn.min.js"></script>
+    <title>javalin twirl alpinejs demo</title>
+  </head>
+  <body>
+    <div class="container alert alert-success" role="alert">
+      A simple success alert—check it out!
+    </div>
+
+    <div class="container alert alert-secondary" role="alert">
+      <p>A very simple "todo" UI using javalin backend and
+        <a href="https://github.com/playframework/twirl">twirl</a> templates
+      </p>
+    </div>
+
+    <div class="container" id="todo-table">
+    </div>
+
+    <script src="/webjars/bootstrap/5.3.3/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>
