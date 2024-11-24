@@ -2,6 +2,7 @@ val scala3Version = "3.5.2"
 
 val webJars = Seq(
 	"org.webjars.npm" % "bootstrap" % "5.3.3",
+	"org.webjars.npm" % "htmx.org" % "2.0.3",
 	"org.webjars.npm" % "alpinejs" % "3.14.3"
 )
 
@@ -23,7 +24,10 @@ lazy val root = project
 		libraryDependencies ++= Seq(
 			"io.javalin" % "javalin" % "6.3.0",
 			"ch.qos.logback" % "logback-classic" % "1.5.12",
-			"org.playframework.twirl" %% "twirl-api" % "2.0.7"
+//			"com.lihaoyi" %% "scalatags" % "0.13.1",
+			"org.playframework.twirl" %% "twirl-api" % "2.0.7",
+			"org.playframework" %% "play-json" % "3.0.4"
+
 		),
 		libraryDependencies ++= webJars,
 		libraryDependencies ++= db

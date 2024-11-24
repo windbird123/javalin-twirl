@@ -9,8 +9,13 @@ import org.slf4j.{Logger, LoggerFactory}
 object Server {
 	lazy val logger: Logger = LoggerFactory.getLogger(getClass)
 
+
 	def home(ctx: Context): Unit = {
 		ctx.html(html.index("2024").toString)
+	}
+
+	def comment(ctx: Context): Unit = {
+		ctx.html("<p> message</p>")
 	}
 
 	def main(args: Array[String]): Unit = {
@@ -30,6 +35,7 @@ object Server {
 				config.staticFiles.enableWebjars()
 			})
 			.get("/", home)
+			.post("/comment", comment)
 			.start(8080)
 	}
 }
