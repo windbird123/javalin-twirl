@@ -20,8 +20,8 @@ object Server {
 				})
 
 				config.staticFiles.add(staticFiles => {
-					staticFiles.hostedPath = "/public"
-					staticFiles.directory = "/public"
+					staticFiles.hostedPath = "/assets"
+					staticFiles.directory = "/assets"
 					staticFiles.location = Location.CLASSPATH
 					staticFiles.precompress = false
 				})
