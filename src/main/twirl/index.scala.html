@@ -1,4 +1,4 @@
-@(timestamp: String)
+@(message: String)
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,11 +10,8 @@
     <title>javalin twirl alpinejs demo</title>
   </head>
   <body>
-    <div class="container alert alert-success" role="alert">
-      first base alert
-    </div>
-
-    @html.content("hello world")
+    @share.html.hello()
+    @html.content(message)
 
     <script src="/webjars/bootstrap/5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="/webjars/alpinejs/3.14.3/dist/cdn.min.js"></script>

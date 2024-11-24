@@ -7,9 +7,12 @@
 
 <div class="container">
   <h1>htmx test</h1>
-  <button hx-post="/comment" hx-swap="outerHTML">
-    Click Me
-  </button>
+  <div id="comment">initial htmx message</div>
+
+  <form hx-get="/comment" hx-target="#comment">
+    <input id="my_input" name="text" type="text" placeholder="comment" />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
 
   <h1>alpinejs test</h1>
   <div x-data="{ count: 0 }">

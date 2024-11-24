@@ -5,17 +5,19 @@ import io.javalin.config.JavalinConfig
 import io.javalin.http.Context
 import io.javalin.http.staticfiles.Location
 import org.slf4j.{Logger, LoggerFactory}
+import play.twirl.api.StringInterpolation
+
 
 object Server {
 	lazy val logger: Logger = LoggerFactory.getLogger(getClass)
-
 
 	def home(ctx: Context): Unit = {
 		ctx.html(html.index("2024").toString)
 	}
 
 	def comment(ctx: Context): Unit = {
-		ctx.html("<p> message</p>")
+		val text = ctx.queryParamAsClass("text", classOf[String]).get
+		ctx.html(html"<p>echo: $text</p>".toString)
 	}
 
 	def main(args: Array[String]): Unit = {
@@ -35,7 +37,7 @@ object Server {
 				config.staticFiles.enableWebjars()
 			})
 			.get("/", home)
-			.post("/comment", comment)
+			.get("/comment", comment)
 			.start(8080)
 	}
 }
