@@ -1,18 +1,26 @@
-@(message: String, isEnable: Boolean = true)
+@import com.github.windbird.web.Goal
 
-<div class="container alert alert-secondary" role="alert">
-  <p>secondary message @message</p>
-</div>
-
-
+@(courseGoals: Seq[Goal], message: String, isEnable: Boolean = true)
 <div class="container">
   <h1>htmx test</h1>
-  <div id="comment">initial htmx message</div>
+  <section>
+    <form id="goal-form" hx-post="/goal" hx-target="#goals" hx-swap="beforeend">
+      <div>
+        <label for="goal">Goal</label>
+        <input type="text" id="goal" name="goal" />
+      </div>
+      <button type="submit">Add goal</button>
+    </form>
+  </section>
 
-  <form hx-get="/comment" hx-target="#comment">
-    <input id="my_input" name="text" type="text" placeholder="comment" />
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+  <section>
+    <ul id="goals">
+      @for(goal <- courseGoals) {
+        @share.html.goal_row(goal.id, goal.text)
+      }
+    </ul>
+  </section>
+
 
   <h1>alpinejs test</h1>
   <div x-data="{ count: 0 }">
@@ -22,6 +30,11 @@
 
 
   <h1>Twirl template test</h1>
+  @{message + 1}
+
+  <p id=@{"abc" + message}>id test</p>
+
+
   @myVar = {
   @System.currentTimeMillis()
   }
@@ -56,7 +69,7 @@
 
   <ul>
   @for(x <- 1 to 3) {
-    <li>Item @x</li>
+    <li>Item @{x + 10}</li>
   }
   </ul>
 
@@ -76,6 +89,11 @@
   @defining(1 + 2 + 3) { sum =>
     <p>The answer is @sum</p>
   }
+
+  @defining(1, "b") { (x, y) =>
+    @(x + y)
+  }
+
   @* bootstrap badge over thumbnail image *@
   <div class="item">
     <a href="#">

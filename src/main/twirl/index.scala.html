@@ -1,4 +1,6 @@
 @(message: String)
+@import com.github.windbird.web.Server
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -10,8 +12,7 @@
     <title>javalin twirl alpinejs demo</title>
   </head>
   <body>
-    @share.html.hello()
-    @html.content(message)
+    @html.content(Server.goals, message)
 
     <script src="/webjars/bootstrap/5.3.3/dist/js/bootstrap.min.js"></script>
     <script src="/webjars/alpinejs/3.14.3/dist/cdn.min.js"></script>
