@@ -15,13 +15,15 @@ object Server {
 	lazy val logger: Logger = LoggerFactory.getLogger(getClass)
 
 	def home(ctx: Context): Unit = {
-		ctx.html(html.index("2024").toString)
+		ctx.html(html.home().toString)
 	}
 
-	def comment(ctx: Context): Unit = {
-		val lis = (1 to 10).map(x => html"<li>$x</li>").mkString("")
-		val s = s"<ul>$lis</ul>"
-		ctx.html(s)
+	def template(ctx: Context): Unit = {
+		ctx.html(html.template("my_message").toString)
+	}
+
+	def htmlTest(ctx: Context): Unit = {
+		ctx.html(html.htmx_test(goals).toString)
 	}
 
 	def goal(ctx: Context): Unit = {
@@ -50,8 +52,8 @@ object Server {
 				})
 
 				config.staticFiles.add(staticFiles => {
-					staticFiles.hostedPath = "/assets"
-					staticFiles.directory = "/assets"
+					staticFiles.hostedPath = "/public"
+					staticFiles.directory = "/public"
 					staticFiles.location = Location.CLASSPATH
 					staticFiles.precompress = false
 				})
@@ -60,7 +62,8 @@ object Server {
 				config.staticFiles.enableWebjars()
 			})
 			.get("/", home)
-			.get("/comment", comment)
+			.get("/template", template)
+			.get("/htmx-test", htmlTest)
 			.post("/goal", goal)
 			.delete("/goal/{id}", goal_delete)
 			.start(8080)

@@ -1,0 +1,84 @@
+@(message: String)
+
+@html.main("template") {
+    <div>
+        <h1>Twirl template test</h1>
+        @{
+            message + 1
+        }
+
+        <p id=@{
+            "abc" + message
+        }>id test</p>
+
+
+        @defining{ @System.currentTimeMillis() } { t =>
+            <p id="helloId">change helloId, @message.toUpperCase : @t</p>
+        }
+
+        @defining(1 + 2 + 3) { sum =>
+            <p>The answer is @sum</p>
+        }
+
+        @defining(1, "b") { (x, y) =>
+            @(x + y)
+        }
+
+        <button type="button" onclick="document.getElementById('helloId').textContent = 'Button Clicked'">CLICK</button>
+
+        <br />
+        <br />
+
+        <label>
+            <input type="checkbox" @("checked".when(true))>
+        </label>
+
+        @if(true) {
+            <p>It's enabled</p>
+        } else {
+            <p>It's disabled</p>
+        }
+
+        <p>@(1 + 1) == @(2) is @(1 + 1 == 2)</p>
+        <p>@List("foo", "bar", "baz")</p>
+        <p>@Some(0).filter(_ == 0)</p>
+
+        <p>The answer is @{
+            val a = 3
+            val b = 4
+            a + b
+        }</p>
+
+        <p>max is @math.max(1, 3)</p>
+
+        <ul>
+        @for(x <- 1 to 3) {
+            <li>Item @{
+                x + 10
+            }</li>
+        }
+        </ul>
+
+        <p>@println("Hi")</p> @* Unit expressions yield no content *@
+        <p>
+        @List(1, 2, 3) match {
+            case Nil => { // 반드시 중괄호가 있어야 한다.
+                <em>empty</em>
+            }
+
+            case a :: b => {
+                <em>list contains @a</em>
+            }
+        }
+        </p>
+
+
+        @* bootstrap badge over thumbnail image *@
+        <div class="item">
+            <a href="#">
+                <span class="notify-badge">NAVER</span>
+                <img src="https://www.anewsa.com/news_images/2020/05/26/mark/20200526130624.jpg" alt="myImg" class="img-thumbnail" width="200" height="200"/>
+            </a>
+        </div>
+    </div>
+}

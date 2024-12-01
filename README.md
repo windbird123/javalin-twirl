@@ -10,3 +10,5 @@
 ~reStart
 reStop
 ```
+
+* menu icon: https://fontawesome.com/search?o=r&m=free
