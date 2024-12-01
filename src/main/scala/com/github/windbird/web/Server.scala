@@ -15,15 +15,20 @@ object Server {
 	lazy val logger: Logger = LoggerFactory.getLogger(getClass)
 
 	def home(ctx: Context): Unit = {
-		ctx.html(html.home().toString)
+		val name: String = ctx.queryParamAsClass("name", classOf[String]).getOrDefault("")
+		ctx.html(html.home(name).toString)
 	}
 
 	def template(ctx: Context): Unit = {
 		ctx.html(html.template("my_message").toString)
 	}
 
-	def htmlTest(ctx: Context): Unit = {
+	def htmxTest(ctx: Context): Unit = {
 		ctx.html(html.htmx_test(goals).toString)
+	}
+
+	def alpinejsTest(ctx: Context): Unit = {
+		ctx.html(html.alpinejs_test().toString)
 	}
 
 	def goal(ctx: Context): Unit = {
@@ -31,7 +36,7 @@ object Server {
 		if (text.nonEmpty) {
 			val id = Random.alphanumeric.filter(_.isLetter).take(6).mkString
 			goals = Goal(id, text) +: goals
-			Thread.sleep(1500)
+			Thread.sleep(1000)
 			ctx.html(share.html.goal_row(id, text).toString)
 		} else {
 			ctx.html("")
@@ -63,7 +68,8 @@ object Server {
 			})
 			.get("/", home)
 			.get("/template", template)
-			.get("/htmx-test", htmlTest)
+			.get("/htmx-test", htmxTest)
+			.get("/alpinejs-test", alpinejsTest)
 			.post("/goal", goal)
 			.delete("/goal/{id}", goal_delete)
 			.start(8080)

@@ -1,48 +1,62 @@
 @(menu: String)(content: Html)
 
+
+
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
-        <link rel="stylesheet" type="text/css" href="/public/css/style.css">
-        <link rel="stylesheet" type="text/css" href="/public/css/main.css">
-        <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
-        <title>javalin twirl alpinejs demo</title>
-    </head>
-    <body>
-        <div class="sidebar">
-            <div class="sidebar-header">
-                <img src="https://images.plot.ly/logo/new-branding/plotly-logomark.png" style="width: 3rem;" alt="logo">
-                <h2>Sidebar</h2>
-            </div>
-            <hr/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/style.css">
+    <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css">
+    <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
+    <title>javalin twirl alpinejs demo</title>
+  </head>
 
-            <div class="flex-column nav nav-pills">
-                <a class="nav-link" href="/">
-                    <i class="fa-solid fa-home me-2"></i>
-                    <span>Home</span>
-                </a>
 
-                <a class="nav-link active" href="/template">
-                    <i class="fa-solid fa-user me-2"></i>
-                    <span>Twirl</span>
-                </a>
+  <body>
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <img src="https://images.plot.ly/logo/new-branding/plotly-logomark.png" style="width: 3rem;" alt="logo">
+        <h2>Sidebar</h2>
+      </div>
+      <hr/>
 
-                <a class="nav-link" href="/htmx-test">
-                    <i class="fa-solid fa-bars me-2"></i>
-                    <span>Htmx test</span>
-                </a>
-            </div>
-        </div>
 
-        <div class="content container">@content</div>
+      <div class="flex-column nav nav-pills">
+        <a class=@activate_nav("home") href="/">
+          <i class="fa-solid fa-home me-2"></i>
+          <span>Home</span>
+        </a>
 
-        <script src="/webjars/htmx.org/2.0.3/dist/htmx.min.js"></script>
-        <script src="/webjars/alpinejs/3.14.3/dist/cdn.min.js"></script>
-        <script src="/webjars/bootstrap/5.3.3/dist/js/bootstrap.min.js"></script>
-    </body>
+        <a class=@activate_nav("template") href="/template">
+          <i class="fa-solid fa-user me-2"></i>
+          <span>Template</span>
+        </a>
+
+        <a class=@activate_nav("htmx-test") href="/htmx-test">
+          <i class="fa-solid fa-bars me-2"></i>
+          <span>Htmx test</span>
+        </a>
+
+        <a class=@activate_nav("alpinejs-test") href="/alpinejs-test">
+          <i class="fa-solid fa-star me-2"></i>
+          <span>Alpinejs test</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="content container">@content</div>
+
+    <script src="/webjars/htmx.org/2.0.3/dist/htmx.min.js"></script>
+    <script src="/webjars/alpinejs/3.14.3/dist/cdn.min.js"></script>
+    <script src="/webjars/bootstrap/5.3.3/dist/js/bootstrap.min.js"></script>
+  </body>
+
+  @activate_nav(name: String) = {
+  @if(name == menu) { "nav-link active" } else { "nav-link" }
+  }
 </html>
 

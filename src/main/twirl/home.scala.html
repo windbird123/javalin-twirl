@@ -1,5 +1,10 @@
-@()
+@(name: String)
 
 @html.main("home") {
-    <div>home</div>
+  <form action="/" method="GET">
+    <div class="input-group">
+      <input type="text" name="name" value="@name" class="form-control" placeholder="name" aria-label="name" aria-describedby="basic-addon1">
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+  </form>
 }
