@@ -29,11 +29,11 @@ object Server {
 		if (text.nonEmpty) {
 			val id = Random.alphanumeric.filter(_.isLetter).take(6).mkString
 			goals = Goal(id, text) +: goals
+			Thread.sleep(1500)
 			ctx.html(share.html.goal_row(id, text).toString)
 		} else {
 			ctx.html("")
 		}
-
 	}
 
 	def goal_delete(ctx: Context): Unit = {

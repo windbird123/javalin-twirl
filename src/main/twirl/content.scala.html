@@ -3,8 +3,13 @@
 @(courseGoals: Seq[Goal], message: String, isEnable: Boolean = true)
 <div class="container">
   <h1>htmx test</h1>
+@* hx-on:htmx:after-request="this.reset()" *@
+@* hx-disabled-elt 는 request 가 진핻되는 동안 지정된 selector element 를 disable *@
   <section>
-    <form id="goal-form" hx-post="/goal" hx-target="#goals" hx-swap="beforeend">
+    <form id="goal-form" hx-post="/goal" hx-target="#goals" hx-swap="beforeend"
+    hx-on:htmx:after-request="document.querySelector('form').reset()"
+      hx-disabled-elt="form button"
+    >
       <div>
         <label for="goal">Goal</label>
         <input type="text" id="goal" name="goal" />
@@ -30,9 +35,13 @@
 
 
   <h1>Twirl template test</h1>
-  @{message + 1}
+  @{
+    message + 1
+  }
 
-  <p id=@{"abc" + message}>id test</p>
+  <p id=@{
+    "abc" + message
+  }>id test</p>
 
 
   @myVar = {
@@ -69,7 +78,9 @@
 
   <ul>
   @for(x <- 1 to 3) {
-    <li>Item @{x + 10}</li>
+    <li>Item @{
+      x + 10
+    }</li>
   }
   </ul>
 
