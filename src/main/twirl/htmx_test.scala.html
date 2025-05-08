@@ -1,17 +1,17 @@
 @import com.github.windbird.web.Goal
 
-@(courseGoals: Seq[Goal])
+@(courseGoals: Seq[Goal], query: String = "")
 
 @html.main("htmx-test") {
     <div class="container">
         <h1>htmx test</h1>
         @* hx-on:htmx:after-request="this.reset()" *@
-        @* hx-disabled-elt 는 request 가 진핻되는 동안 지정된 selector element 를 disable *@
+        @* hx-disabled-elt 는 request 가 진행되는 동안 지정된 selector element 를 disable *@
         <section>
             <form id="goal-form" hx-post="/goal" hx-target="#goals" hx-swap="beforeend"
             hx-on:htmx:after-request="document.querySelector('form').reset()"
-            hx-disabled-elt="form button"
-            >
+            hx-disabled-elt="form button" hx-vals='{"courseId": 1}'>
+                <h2>Add a new goal</h2 >
                 <div>
                     <label for="goal">Goal</label>
                     <input type="text" id="goal" name="goal" />
@@ -27,5 +27,12 @@
             }
             </ul>
         </section>
+
+        <form hx-get="/htmx-test" hx-target="#result" data-update-url>
+            <input type="text" name="query" value="@query">
+            <button type="submit">검색</button>
+        </form>
+        <div id="result">@share.html.query_result(query)</div>
+
     </div>
 }

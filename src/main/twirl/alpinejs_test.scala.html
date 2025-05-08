@@ -6,4 +6,11 @@
     <button x-on:click="count++">Increment</button>
     <span x-text="count"></span>
   </div>
+
+  <div x-data="{ open: false}">
+    <button x-on:click="open = !open">Toggle Button</button>
+    <div x-show="open" x-transition>
+      <h1>This is the content!</h1>
+    </div>
+  </div>
 }
