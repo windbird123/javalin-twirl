@@ -28,6 +28,7 @@
             </ul>
         </section>
 
+        @* /htmx-test 로 항상 전체 body 를 받고, hx-select 로 #result 부분만 가져와 업데이트하는 방법도 있음 *@
         <form hx-get="/htmx-test" hx-target="#result" data-update-url>
             <input type="text" name="query" value="@query">
             <button type="submit">검색</button>
