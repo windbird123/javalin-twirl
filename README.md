@@ -6,6 +6,8 @@
 * [twirl](https://www.playframework.com/documentation/3.0.x/ScalaTemplates)
 
 ## Dev
+[sbt-resolver](https://github.com/spray/sbt-revolver) 로 Hot Reloading 
+
 ```bash
 reStart
 # reStart / mainClass := Some("com.github.windbird.web.Server")
