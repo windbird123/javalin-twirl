@@ -7,6 +7,17 @@
 
 ## Dev
 ```bash
+reStart
+
+# 코드 변경이 있으면 또
+reStart
+
+# 종료 하려면
+reStop
+```
+
+혹은 코드 변경시 자동으로 reStart 가 실행되게 하려면
+```bash
 ~reStart
 reStop
 ```
