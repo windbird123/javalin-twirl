@@ -8,6 +8,7 @@
 ## Dev
 ```bash
 reStart
+# reStart / mainClass := Some("com.github.windbird.web.Server")
 
 # 코드 변경이 있으면 또
 reStart
