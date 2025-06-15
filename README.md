@@ -1,5 +1,9 @@
 ## sbt project compiled with Scala 3
 
+## Branch 에 따라 UI 스타일이 다릅니다.
+* simple version: main
+* [tabler](https://tabler.io/) version: tabler
+
 ## Stack
 * [javalin](https://javalin.io/)
 * [htmx](https://htmx.org/)
