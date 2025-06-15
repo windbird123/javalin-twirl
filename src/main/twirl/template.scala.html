@@ -1,84 +1,185 @@
 @(message: String)
 
 @html.main("template") {
-    <div>
-        <h1>Twirl template test</h1>
-        @{
-            message + 1
-        }
-
-        <p id=@{
-            "abc" + message
-        }>id test</p>
-
-
-        @defining{ @System.currentTimeMillis() } { t =>
-            <p id="helloId">change helloId, @message.toUpperCase : @t</p>
-        }
-
-        @defining(1 + 2 + 3) { sum =>
-            <p>The answer is @sum</p>
-        }
-
-        @defining(1, "b") { (x, y) =>
-            @(x + y)
-        }
-
-        <button type="button" onclick="document.getElementById('helloId').textContent = 'Button Clicked'">CLICK</button>
-
-        <br />
-        <br />
-
-        <label>
-            <input type="checkbox" @("checked".when(true))>
-        </label>
-
-        @if(true) {
-            <p>It's enabled</p>
-        } else {
-            <p>It's disabled</p>
-        }
-
-        <p>@(1 + 1) == @(2) is @(1 + 1 == 2)</p>
-        <p>@List("foo", "bar", "baz")</p>
-        <p>@Some(0).filter(_ == 0)</p>
-
-        <p>The answer is @{
-            val a = 3
-            val b = 4
-            a + b
-        }</p>
-
-        <p>max is @math.max(1, 3)</p>
-
-        <ul>
-        @for(x <- 1 to 3) {
-            <li>Item @{
-                x + 10
-            }</li>
-        }
-        </ul>
-
-        <p>@println("Hi")</p> @* Unit expressions yield no content *@
-        <p>
-        @List(1, 2, 3) match {
-            case Nil => { // 반드시 중괄호가 있어야 한다.
-                <em>empty</em>
-            }
-
-            case a :: b => {
-                <em>list contains @a</em>
-            }
-        }
-        </p>
-
-
-        @* bootstrap badge over thumbnail image *@
-        <div class="item">
-            <a href="#">
-                <span class="notify-badge">NAVER</span>
-                <img src="https://www.anewsa.com/news_images/2020/05/26/mark/20200526130624.jpg" alt="myImg" class="img-thumbnail" width="200" height="200"/>
-            </a>
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">
+            Template Examples
+          </h2>
+          <div class="text-muted">Twirl template rendering demonstrations</div>
         </div>
+      </div>
     </div>
+  </div>
+
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row row-deck row-cards">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Basic Template Operations</h3>
+            </div>
+            <div class="card-body">
+              <div class="list-group list-group-flush">
+                <div class="list-group-item">
+                  <strong>Message + 1:</strong> 
+                  <span class="badge bg-blue ms-2">@{message + 1}</span>
+                </div>
+                <div class="list-group-item">
+                  <strong>Dynamic ID:</strong> 
+                  <span class="text-code" id=@{"abc" + message}>id test</span>
+                </div>
+                @defining{ @System.currentTimeMillis() } { t =>
+                  <div class="list-group-item">
+                    <strong>Current Time:</strong>
+                    <div id="helloId" class="text-muted">@message.toUpperCase : @t</div>
+                  </div>
+                }
+                @defining(1 + 2 + 3) { sum =>
+                  <div class="list-group-item">
+                    <strong>Math Operation:</strong> 
+                    <span class="badge bg-green ms-2">The answer is @sum</span>
+                  </div>
+                }
+                @defining(1, "b") { (x, y) =>
+                  <div class="list-group-item">
+                    <strong>Tuple Defining:</strong> 
+                    <span class="text-code">@{x + y}</span>
+                  </div>
+                }
+              </div>
+              <div class="mt-3">
+                <button type="button" class="btn btn-primary" 
+                        onclick="document.getElementById('helloId').textContent = 'Button Clicked'">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="m0 0h24v24H0z" fill="none"/>
+                    <path d="M7 12l5 5l10 -10"/>
+                  </svg>
+                  Click to Update Time
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Conditional & Logic Examples</h3>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" @("checked".when(true)) id="exampleCheck">
+                  <label class="form-check-label" for="exampleCheck">
+                    Conditional Checkbox (always checked)
+                  </label>
+                </div>
+              </div>
+
+              @if(true) {
+                <div class="alert alert-success" role="alert">
+                  <h4 class="alert-title">Condition: True</h4>
+                  <div class="text-secondary">It's enabled</div>
+                </div>
+              } else {
+                <div class="alert alert-danger" role="alert">
+                  <h4 class="alert-title">Condition: False</h4>
+                  <div class="text-secondary">It's disabled</div>
+                </div>
+              }
+
+              <div class="list-group list-group-flush">
+                <div class="list-group-item">
+                  <strong>Math Check:</strong> @(1 + 1) == @(2) is @(1 + 1 == 2)
+                </div>
+                <div class="list-group-item">
+                  <strong>List:</strong> <span class="text-code">@List("foo", "bar", "baz")</span>
+                </div>
+                <div class="list-group-item">
+                  <strong>Option Filter:</strong> <span class="text-code">@Some(0).filter(_ == 0)</span>
+                </div>
+                <div class="list-group-item">
+                  <strong>Block Expression:</strong> 
+                  <span class="badge bg-purple ms-2">@{
+                    val a = 3
+                    val b = 4
+                    a + b
+                  }</span>
+                </div>
+                <div class="list-group-item">
+                  <strong>Function Call:</strong> max is @math.max(1, 3)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Loops & Pattern Matching</h3>
+            </div>
+            <div class="card-body">
+              <h4>For Loop Example:</h4>
+              <div class="list-group mb-3">
+                @for(x <- 1 to 3) {
+                  <div class="list-group-item">
+                    <div class="row align-items-center">
+                      <div class="col-auto">
+                        <span class="status-dot bg-blue"></span>
+                      </div>
+                      <div class="col">
+                        Item @{x + 10}
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+
+              <h4>Pattern Matching Example:</h4>
+              <div class="card bg-light">
+                <div class="card-body">
+                  @List(1, 2, 3) match {
+                    case Nil => {
+                      <em class="text-muted">empty</em>
+                    }
+                    case a :: b => {
+                      <strong>List contains @a</strong>
+                    }
+                  }
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Image with Badge</h3>
+            </div>
+            <div class="card-body text-center">
+              <div class="position-relative d-inline-block">
+                <span class="badge bg-red position-absolute top-0 start-100 translate-middle">
+                  NAVER
+                </span>
+                <img src="https://www.anewsa.com/news_images/2020/05/26/mark/20200526130624.jpg" 
+                     alt="Sample Image" 
+                     class="img-thumbnail" 
+                     width="200" 
+                     height="200"/>
+              </div>
+              <div class="mt-2">
+                <small class="text-muted">Sample image with notification badge</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 }

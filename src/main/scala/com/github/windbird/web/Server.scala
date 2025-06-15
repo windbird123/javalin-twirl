@@ -16,7 +16,6 @@ object Server {
 
 	def home(ctx: Context): Unit = {
 		val name: String = ctx.queryParamAsClass("name", classOf[String]).getOrDefault("")
-		//		ctx.html(html"<div>string interpolation test</div>".toString)
 		ctx.html(html.home(name).toString)
 	}
 
@@ -24,27 +23,10 @@ object Server {
 		ctx.html(html.template("my_message").toString)
 	}
 
-	// 방법1
 	def htmxTest(ctx: Context): Unit = {
 		val query: String = ctx.queryParamAsClass("query", classOf[String]).getOrDefault("")
 		ctx.html(html.htmx_test(goals, query).toString)
 	}
-
-	// 방법 2: 이게 리소스면에서 효율적이지만 복잡하다.
-	//	def htmxTest(ctx: Context): Unit = {
-	//		// hx-request 헤더가 존재하면 htmx 요청임
-	//		val isHxRequest: Option[Boolean] = Option(ctx.header("HX-Request")).map(_.toBoolean)
-	//		val query: String = ctx.queryParamAsClass("query", classOf[String]).getOrDefault("")
-	//
-	//		isHxRequest match {
-	//			case Some(true) => // htmx 요청일 경우
-	//				ctx.html(share.html.query_result(query).toString)
-	//
-	//			case _ => // 일반 요청일 경우
-	//				// query param 으로 전체 페이지가 rendering 되도록 한다.
-	//				ctx.html(html.htmx_test(goals, query).toString)
-	//		}
-	//	}
 
 	def alpinejsTest(ctx: Context): Unit = {
 		ctx.html(html.alpinejs_test().toString)
@@ -72,7 +54,7 @@ object Server {
 	def main(args: Array[String]): Unit = {
 		val app: Javalin = Javalin.create((config: JavalinConfig) => {
 				config.requestLogger.http((context, ms) => {
-					logger.info(s"Requests: ${context.req.getRequestURI}")
+					logger.info(s"Request: ${context.req.getRequestURI} took ${ms}ms")
 				})
 
 				config.staticFiles.add(staticFiles => {

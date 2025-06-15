@@ -1,63 +1,79 @@
 @(menu: String)(content: Html)
 
-
-
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/5.3.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v6.3.0/css/all.css">
-    <link rel="stylesheet" type="text/css" href="/public/stylesheets/style.css">
-    <link rel="stylesheet" type="text/css" href="/public/stylesheets/main.css">
+    <!-- Tabler CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@@tabler/core@@1.0.0-beta17/dist/css/tabler.min.css" rel="stylesheet"/>
+    <link href="https://cdn.jsdelivr.net/npm/@@tabler/icons@@latest/icons-sprite.svg" rel="preload" as="image"/>
     <link rel="icon" type="image/svg+xml" href="/public/images/favicon.svg">
-    <script src="/public/javascripts/main.js"></script>
-    <title>javalin twirl alpinejs demo</title>
+    <title>Javalin Twirl Demo - Tabler</title>
   </head>
 
-
   <body>
-    <div class="sidebar">
-      <div class="sidebar-header">
-        <img src="https://images.plot.ly/logo/new-branding/plotly-logomark.png" style="width: 3rem;" alt="logo">
-        <h2>Sidebar</h2>
+    <aside class="navbar navbar-vertical navbar-expand-lg" data-bs-theme="dark">
+      <div class="container-fluid">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-menu" aria-controls="sidebar-menu" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <h1 class="navbar-brand navbar-brand-autodark">
+          <a href="/">
+            <img src="https://images.plot.ly/logo/new-branding/plotly-logomark.png" width="110" height="32" alt="Tabler" class="navbar-brand-image">
+          </a>
+        </h1>
+        <div class="collapse navbar-collapse" id="sidebar-menu">
+          <ul class="navbar-nav pt-lg-3">
+            <li class="nav-item">
+              <a class="nav-link @if(menu == "home") { active }" href="/">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="m0 0h24v24H0z" fill="none"/><path d="m5 12 -2 0l9 -9l9 9l-2 0" /><path d="m5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" /><path d="m9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" /></svg>
+                </span>
+                <span class="nav-link-title">Home</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @if(menu == "template") { active }" href="/template">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="m0 0h24v24H0z" fill="none"/><path d="M8 7a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" /><path d="M6 21v-2a4 4 0 0 1 4 -4h4a2 2 0 0 1 2 2v1a2 2 0 0 1 -2 2h-6z" /></svg>
+                </span>
+                <span class="nav-link-title">Template</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @if(menu == "htmx-test") { active }" href="/htmx-test">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="m0 0h24v24H0z" fill="none"/><path d="M4 6l16 0" /><path d="M4 12l16 0" /><path d="M4 18l16 0" /></svg>
+                </span>
+                <span class="nav-link-title">HTMX Test</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link @if(menu == "alpinejs-test") { active }" href="/alpinejs-test">
+                <span class="nav-link-icon d-md-none d-lg-inline-block">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="m0 0h24v24H0z" fill="none"/><path d="m12 17.75l-6.172 -3.245l-0.075 -6.505l6.247 -3.245l6.172 3.245l0.075 6.505z" /></svg>
+                </span>
+                <span class="nav-link-title">Alpine.js Test</span>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
-      <hr/>
+    </aside>
 
-
-      <div class="flex-column nav nav-pills">
-        <a class=@activate_nav("home") href="/">
-          <i class="fa-solid fa-home me-2"></i>
-          <span>Home</span>
-        </a>
-
-        <a class=@activate_nav("template") href="/template">
-          <i class="fa-solid fa-user me-2"></i>
-          <span>Template</span>
-        </a>
-
-        <a class=@activate_nav("htmx-test") href="/htmx-test">
-          <i class="fa-solid fa-bars me-2"></i>
-          <span>Htmx test</span>
-        </a>
-
-        <a class=@activate_nav("alpinejs-test") href="/alpinejs-test">
-          <i class="fa-solid fa-star me-2"></i>
-          <span>Alpinejs test</span>
-        </a>
+    <div class="page-wrapper">
+      <div class="page-body">
+        <div class="container-xl">
+          @content
+        </div>
       </div>
     </div>
 
-    <div class="content container">@content</div>
-
+    <!-- Tabler Core -->
+    <script src="https://cdn.jsdelivr.net/npm/@@tabler/core@@1.0.0-beta17/dist/js/tabler.min.js"></script>
     <script src="/webjars/htmx.org/2.0.3/dist/htmx.min.js"></script>
     <script src="/webjars/alpinejs/3.14.3/dist/cdn.min.js"></script>
-    <script src="/webjars/bootstrap/5.3.3/dist/js/bootstrap.min.js"></script>
   </body>
-
-  @activate_nav(name: String) = {
-    @if(name == menu) { "nav-link active" } else { "nav-link" }
-  }
 </html>
 

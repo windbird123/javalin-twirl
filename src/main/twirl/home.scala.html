@@ -1,10 +1,89 @@
 @(name: String)
 
 @html.main("home") {
-  <form action="/" method="GET">
-    <div class="input-group">
-      <input type="text" name="name" value="@name" class="form-control" placeholder="name" aria-label="name" aria-describedby="basic-addon1">
-      <button type="submit" class="btn btn-primary">Submit</button>
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">
+            Home
+          </h2>
+        </div>
+      </div>
     </div>
-  </form>
+  </div>
+
+  <div class="page-body">
+    <div class="container-xl">
+      <div class="row row-deck row-cards">
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Welcome</h3>
+            </div>
+            <div class="card-body">
+              <form action="/" method="GET">
+                <div class="mb-3">
+                  <label class="form-label">Enter your name</label>
+                  <input type="text" name="name" value="@name" class="form-control" placeholder="Your name">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+              @if(name.nonEmpty) {
+                <div class="alert alert-success mt-3" role="alert">
+                  <h4 class="alert-title">Hello @name!</h4>
+                  <div class="text-secondary">Welcome to the Javalin Twirl demo with Tabler UI.</div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Features</h3>
+            </div>
+            <div class="card-body">
+              <div class="list-group list-group-flush">
+                <a href="/template" class="list-group-item list-group-item-action">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <span class="status-dot d-block bg-blue"></span>
+                    </div>
+                    <div class="col text-truncate">
+                      <strong>Template Example</strong>
+                      <div class="text-muted">View template rendering demo</div>
+                    </div>
+                  </div>
+                </a>
+                <a href="/htmx-test" class="list-group-item list-group-item-action">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <span class="status-dot d-block bg-green"></span>
+                    </div>
+                    <div class="col text-truncate">
+                      <strong>HTMX Integration</strong>
+                      <div class="text-muted">Interactive forms with HTMX</div>
+                    </div>
+                  </div>
+                </a>
+                <a href="/alpinejs-test" class="list-group-item list-group-item-action">
+                  <div class="row align-items-center">
+                    <div class="col-auto">
+                      <span class="status-dot d-block bg-yellow"></span>
+                    </div>
+                    <div class="col text-truncate">
+                      <strong>Alpine.js Demo</strong>
+                      <div class="text-muted">Client-side reactivity</div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 }
