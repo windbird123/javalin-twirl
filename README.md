@@ -5,6 +5,10 @@
 * [htmx](https://htmx.org/)
 * [twirl](https://www.playframework.com/documentation/3.0.x/ScalaTemplates)
 
+## Branch 에 따라 UI 스타일이 다릅니다.
+* simple version: main
+* [tabler](https://tabler.io/) version: tabler
+
 ## Dev
 [sbt-resolver](https://github.com/spray/sbt-revolver) 로 Hot Reloading 
 
